@@ -1,18 +1,35 @@
-Demander au joueur de choisir un élément (pierre, feuille, ciseaux)
-Faire choisir un élément par le programme au hasard
-Comparer les deux éléments
-Définir le vainqueur
-Annoncer le vainqueur
+0) Introduction message
 
+A) The player inputs a number of rounds for the game [function getRounds()]    
+    A-1) Prompt the player for a number of rounds [sub-function promptPlayer()]
+    A-2) Check if number of rounds chosen by the user is valid [sub-function testRounds()]
+         else back to A-1)
+    [return number of rounds]
 
-Créer un array de 3 valeurs (pierre feuille ciseaux)
-Prompt au joueur de définir le nombre de manches (de 1 à 5) et vérif cohérence
-Prompt au joueur de choisir un élément parmis "pierre" "feuille" "ciseaux" et vérif cohérence
-Enregistrer le choix du joueur dans une variable string
-Générer un nombre de manière aléatoire entre 1 et 3
-Récupérer dans le array l'élément associé
-Comparer le choix du joueur au choix du programme
-Incrémenter dans des variables "joueur" et "programme" le nombre de victoires
-Annoncer le gagnant de la manche et le score total
+B) The player inputs his answer [function getPlayerAnswer()]
+    B-1) Prompt the player for a choice [sub-function promptPlayer]
+    B-2) Check if player's choice is valid by comparison with array of valid answers [sub-function testAnswer()]
+         else back to B-1)
+    [return player's answer]
+
+C) The computer makes a random answer [function getComputerAnswer()]
+    C-1) Generate a random integer [sub-function getRdmInt()]
+    C-2) Associate the random integer with a positon in the array of valid answers [sub-function getRdmAnswer()]
+    [return computer's answer]
+
+D) Answers are compared, round winner is annouced [function getRoundWinner()]
+    D-1) Compare player's answer vs computer's answer [sub-function compareAnswers()]
+    [return round winner]
+
+E) Adjust scores [function adjustScores(roundWinner)]
+    [return adjusted winner's score]
+
+F) Look for end of game or for more rounds [function isEndOfGame(rounds)]
+    F-1) Decrease remaining number of rounds [sub-function decreaseRounds(rounds)]
+        [return remainingRounds]
+    F-2) Check if there is another round to play [sub-function isMoreRounds(remainingRounds)]
+        [loop back to B)] else F-3)
+    F-3) Announce the winner of the game [function EndOfGame()]
+
 
 
