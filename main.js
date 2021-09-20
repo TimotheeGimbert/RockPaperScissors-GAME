@@ -9,8 +9,8 @@ let numberOfRounds = 0;
 // FUNCTIONS
 
 function start() {          // this is the main function that loads the whole game
-    //getRounds();            // user is asked for the number of rounds
-    numberOfRounds = 3;
+    getRounds();            // user is asked for the number of rounds
+    //numberOfRounds = 3;
     getPlayerChoice();      // user is asked for a choice
 }
 
