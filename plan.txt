@@ -1,0 +1,18 @@
+Demander au joueur de choisir un élément (pierre, feuille, ciseaux)
+Faire choisir un élément par le programme au hasard
+Comparer les deux éléments
+Définir le vainqueur
+Annoncer le vainqueur
+
+
+Créer un array de 3 valeurs (pierre feuille ciseaux)
+Prompt au joueur de définir le nombre de manches (de 1 à 5) et vérif cohérence
+Prompt au joueur de choisir un élément parmis "pierre" "feuille" "ciseaux" et vérif cohérence
+Enregistrer le choix du joueur dans une variable string
+Générer un nombre de manière aléatoire entre 1 et 3
+Récupérer dans le array l'élément associé
+Comparer le choix du joueur au choix du programme
+Incrémenter dans des variables "joueur" et "programme" le nombre de victoires
+Annoncer le gagnant de la manche et le score total
+
+
