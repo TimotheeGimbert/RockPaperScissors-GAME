@@ -8,12 +8,6 @@ let numberOfRounds = 0;
 
 // FUNCTIONS
 
-function start() {          // this is the main function that loads the whole game
-    getRounds();            // user is asked for the number of rounds
-    //numberOfRounds = 3;
-    getPlayerChoice();      // user is asked for a choice
-}
-
 function getRounds() {      // prompt the user to define the number of rounds and check for consistency
     numberOfRounds = parseInt(prompt("How many rounds do we play?"));
     while (!Number.isInteger(numberOfRounds) || numberOfRounds < 1) {
@@ -27,30 +21,38 @@ function getRounds() {      // prompt the user to define the number of rounds an
 }
 
 function getPlayerChoice() {        // get choice from player
-    let playerChoice = undefined;
-
     function getChoice() {          // prompt the player to enter choice
-        playerChoice = prompt("Enter your choice (rock, paper, or scissors)");
-        playerChoice = playerChoice.toUpperCase();          // capitalize the choice to match the array of choices
+        const choice = prompt("Enter your choice (rock, paper, or scissors)");
+        const playerChoice = choice.toUpperCase();          // capitalize the choice to match the array of choices
+        return playerChoice;
     }
-
-    function verify() {             // verify that the player choice is authorized
-        while (choices.indexOf(playerChoice) == -1) {       // check if choice is in the array of choices
-            console.log(playerChoice);
+    function verify(choice) {             // verify that the player choice is authorized
+        while (choices.indexOf(choice) == -1) {       // check if choice is in the array of choices
+            console.log(choice);
             console.log("Your choice is not a possible answer...");
             getChoice();
         }
     }
-
-    getChoice();
-    verify();
-    console.log("\n OK PERFECT you have chosen " + playerChoice);
+    let playerChoice = getChoice();
+    verify(playerChoice);
+    return playerChoice;
 }
 
+function getComputerChoice() {
+    const randomInt = Math.floor(Math.random() * 2);
+    const randomChoice = choices[randomInt];
+    const computerChoice = randomChoice.toUpperCase();
+    return computerChoice;
+}
 
 
 // EXECUTION
 
 console.log("Hello professor Shandra, here is HAL ! \nI am ready to play Rock-Paper-Scissors with you !");
 console.log("To start the game, answer me in the prompt");
-start();
+//getRounds();            // user is asked for the number of rounds
+numberOfRounds = 3;
+let playerChoice = getPlayerChoice();      // user is asked for a choice
+console.log("\n OK PERFECT you have chosen " + playerChoice);
+let computerChoice = getComputerChoice();
+console.log("\n In the same time, I have chosen " + computerChoice);
