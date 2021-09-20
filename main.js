@@ -1,60 +1,60 @@
-// INITIALIZATION
+// INIT
 
-let numberOfRounds = undefined;
-const choices = ["ROCK", "PAPER", "SCISSORS"];
+const maxRounds = 10; // set the max limit of rounds
+const choices = ["ROCK", "PAPER", "SCISSORS"]; // array of valid choices
+
+let remainingRounds = 1; // number of rounds to play the whole game, 1 by default
+let playerScore = 0; // initial score of the human player
+let computerScore = 0; // initial score of the computer
+
 
 
 // FUNCTIONS
 
-function getRounds() { // prompts the user to define a number of rounds
-    let rounds = parseInt(prompt("How many rounds do we play?"));
-    while (!Number.isInteger(rounds) || rounds < 1) { // verifies input consistency
-        rounds = parseInt(prompt("I need you to choose a positiv integer ...!"));
+function welcome() { // show welcoming messages
+    console.log("Hello Player, I am the computer HAL-2021. \nI am ready to play Rock-Paper-Scissors with you !");
+    console.log("To start the game, answer me directly in the prompt !");
+}
+
+function getRounds() { // prompt the user to define a number of rounds to play the whole game
+    let rounds = parseInt(prompt("How many rounds do we play?")); // input number of rounds
+    while (!Number.isInteger(rounds) || rounds < 1) { // check if input is valid
+        rounds = parseInt(prompt("I need you to choose a positiv integer ...!")); // prompt again if not
     }
-    if (rounds > 5) { // limits to 5 rounds and returns
-        console.log(`I don't have time for ${rounds} rounds, we will just play 5 rounds ...`);
-        rounds = 5;
+    if (rounds > maxRounds) { // limit the number of rounds
+        console.log(`I don't have time for ${rounds} rounds...`);
+        rounds = maxRounds; // set number of rounds to a max limit
     }
-    else console.log(`\n OK we will play ${rounds} rounds !`);
+    console.log(`\n We will play ${rounds} rounds !`);
     return rounds;
 }
 
 
-function getPlayerChoice() { // get the player choice      
-    let playerChoice = promptPlayer(); // prompts the player
-    function promptPlayer() { // asks for the input, capitalizes it, returns it
-        const input = prompt("Enter your choice (rock, paper, or scissors)"); // asking for the input
-        let output = input.toUpperCase(); // capitalizing the input
-        return output; // returning the capitalized input
+function getPlayerAnswer() { 
+    let answer = prompt("Enter your choice (rock, paper, or scissors)"); // asking for the input
+    answer = answer.toUpperCase(); // capitalizing the input
+    while (choices.indexOf(answer) == -1) { // while answer is not within the array of valid choices
+        console.log("Sorry but you did not input a possible choice ...");
+        answer = prompt("Enter your choice (rock, paper, or scissors)"); // asking for an input again
+        answer = answer.toUpperCase(); // capitalizing the new input
     }
-    while (choices.indexOf(playerChoice) == -1) { // checking input's consistency
-        console.log("Sorry but you did not input a possible answer ..."); // 
-        playerChoice = promptPlayer(); // prompting the player again
-    }
-    console.log("\n You have chosen " + playerChoice); 
+    console.log("\n You have chosen " + answer); 
+    return answer;
 }
 
-function getComputerChoice() {
+function getComputerAnswer() {
     const randomInt = Math.floor(Math.random() * 2);
-    const randomChoice = choices[randomInt];
-    let computerChoice = randomChoice.toUpperCase();
-    console.log("... and the computer has chosen " + computerChoice);
-    return computerChoice;
+    let computerAnswer = choices[randomInt];
+    computerAnswer = computerAnswer.toUpperCase();
+    console.log("... and the computer has chosen " + computerAnswer);
+    return computerAnswer;
 }
 
-function compareResults(playerDecision, computerDecision) {
-
-}
 
 
 
 // EXECUTION
-
-console.log("Hello Player, I am the computer HAL-2021. \nI am ready to play Rock-Paper-Scissors with you !");
-console.log("To start the game, answer me directly in the prompt !");
-
-numberOfRounds = getRounds();           // user is asked for the number of rounds
-let playerDecision = getPlayerChoice();       // user is asked for a choice
-let computerDecision = getComputerChoice();   // computer makes a random choice
-
-compareResults(playerDecision, computerDecision);
+welcome();
+remainingRounds = getRounds();
+let playerAnswer = getPlayerAnswer();
+let computerAnswer = getComputerAnswer();
