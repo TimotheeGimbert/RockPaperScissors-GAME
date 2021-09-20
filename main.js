@@ -9,7 +9,8 @@ let numberOfRounds = 0;
 // FUNCTIONS
 
 function start() {          // this is the main function that loads the whole game
-    getRounds();            // user is asked for the number of rounds
+    //getRounds();            // user is asked for the number of rounds
+    numberOfRounds = 3;
     getPlayerChoice();      // user is asked for a choice
 }
 
@@ -22,20 +23,19 @@ function getRounds() {      // prompt the user to define the number of rounds an
         console.log(`I don't have time for ${numberOfRounds} rounds, we will just play 5 rounds !`);
         numberOfRounds = 5;
     }
-    else console.log(`OK PERFECT we will play ${numberOfRounds} rounds !`);
+    else console.log(`\n OK PERFECT we will play ${numberOfRounds} rounds !`);
 }
 
-function getPlayerChoice() {                                                    // get choice from player
+function getPlayerChoice() {        // get choice from player
     let playerChoice = undefined;
 
-    function getChoice() {                                                      // prompt the player to enter choice
+    function getChoice() {          // prompt the player to enter choice
         playerChoice = prompt("Enter your choice (rock, paper, or scissors)");
-        playerChoice = playerChoice.toUpperCase();                              // capitalize the choice to match the array of choices
+        playerChoice = playerChoice.toUpperCase();          // capitalize the choice to match the array of choices
     }
 
-    function verify() {                                                         // verify that the player choice is authorized
-        
-        while (choices.indexOf(playerChoice) == -1) {                                 // check if choice is in the array of choices
+    function verify() {             // verify that the player choice is authorized
+        while (choices.indexOf(playerChoice) == -1) {       // check if choice is in the array of choices
             console.log(playerChoice);
             console.log("Your choice is not a possible answer...");
             getChoice();
@@ -43,9 +43,8 @@ function getPlayerChoice() {                                                    
     }
 
     getChoice();
-    console.log(playerChoice);
     verify();
-    console.log("You have chosen " + playerChoice);
+    console.log("\n OK PERFECT you have chosen " + playerChoice);
 }
 
 
@@ -53,5 +52,5 @@ function getPlayerChoice() {                                                    
 // EXECUTION
 
 console.log("Hello professor Shandra, here is HAL ! \nI am ready to play Rock-Paper-Scissors with you !");
-console.log("To start the game, please enter this expression:  start()");
+console.log("To start the game, answer me in the prompt");
 start();
