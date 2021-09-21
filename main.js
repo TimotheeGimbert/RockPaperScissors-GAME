@@ -2,78 +2,99 @@
 
 const maxRounds = 10; // set the max limit of rounds
 const choices = ["ROCK", "PAPER", "SCISSORS"]; // array of valid choices
-
-let remainingRounds = 1; // number of rounds to play the whole game, 1 by default
-let playerScore = 0; // initial score of the human player
-let computerScore = 0; // initial score of the computer
+let playerScore = 0;
+let computerScore = 0;
 
 
 
 // FUNCTIONS
 
-function welcome() { // show welcoming messages
-    console.log("Hello Player, I am the computer HAL-2021. \nI am ready to play Rock-Paper-Scissors with you !");
-    console.log("To start the game, answer me directly in the prompt !");
-}
-
-function getRounds() { // prompt the user to define a number of rounds to play the whole game
-    let rounds = parseInt(prompt("How many rounds do we play?")); // input number of rounds
-    while (!Number.isInteger(rounds) || rounds < 1) { // check if input is valid
-        rounds = parseInt(prompt("I need you to choose a positiv integer ...!")); // prompt again if not
+function getNbRounds() {        // prompts the player to set number of rounds
+    let nbRounds = parseInt(prompt("How many rounds do we play?")); // input number of rounds
+    while (!Number.isInteger(nbRounds) || nbRounds < 1) { // check if input is valid
+        nbRounds = parseInt(prompt("I need you to choose a positiv integer ...!")); // prompt again if not
     }
-    if (rounds > maxRounds) { // limit the number of rounds
-        console.log(`I don't have time for ${rounds} rounds...`);
-        rounds = maxRounds; // set number of rounds to a max limit
+    if (nbRounds > maxRounds) { // limiting the number of rounds
+        console.log(`I don't have time for ${nbRounds} rounds...`);
+        nbRounds = maxRounds;
     }
-    console.log(`\n We will play ${rounds} rounds !`);
-    return rounds;
+    console.log(`\n We will play ${nbRounds} rounds !`);
+    return nbRounds;
 }
-
-
-function getPlayerAnswer() { 
-    let answer = prompt("Enter your choice (rock, paper, or scissors)"); // asking for the input
-    answer = answer.toUpperCase(); // capitalizing the input
-    while (choices.indexOf(answer) == -1) { // while answer is not within the array of valid choices
+function getPlayerChoice() {    // prompts the player and return his choice
+    let choice = prompt("Enter your choice (rock, paper, or scissors)"); // asking for the input
+    choice = choice.toUpperCase(); // capitalizing the input
+    while (choices.indexOf(choice) == -1) { // while choice is not within the array of valid choices
         console.log("Sorry but you did not input a possible choice ...");
-        answer = prompt("Enter your choice (rock, paper, or scissors)"); // asking for an input again
-        answer = answer.toUpperCase(); // capitalizing the new input
+        choice = prompt("You have to choose between rock paper and scissors..."); // asking for an input again
+        choice = choice.toUpperCase(); // capitalizing the new input
     }
-    console.log("\n You have chosen " + answer); 
-    return answer;
+    console.log("\n You have chosen " + choice); 
+    return choice;
 }
-
-function getComputerAnswer() {
+function getComputerChoice() {  // generates and returns a random choice
     const randomInt = Math.floor(Math.random() * 3);
-    let computerAnswer = choices[randomInt];
-    computerAnswer = computerAnswer.toUpperCase();
-    console.log("... and the computer has chosen " + computerAnswer);
-    return computerAnswer;
+    let choice = choices[randomInt];
+    choice = choice.toUpperCase();
+    console.log("... and the computer has chosen " + choice);
+    return choice;
+}
+function round() {              // runs a round of the game and returns the result as a string
+    const playerChoice = getPlayerChoice();
+    const computerChoice = getComputerChoice();
+    function playerWins() {
+        let playerWinsMsg = `YOU WIN! (${playerChoice.toLowerCase()} beats ${computerChoice.toLowerCase()})`;
+        playerScore += 1;
+        return playerWinsMsg;
+    }
+    function playerLooses() {
+        let playerLoosesMsg = `YOU LOOSE! (${computerChoice.toLowerCase()} beats ${playerChoice.toLowerCase()})`;
+        computerScore += 1;
+        return playerLoosesMsg;
+    }
+    const equalityMsg = "Nobody wins ... !";
+
+    if (playerChoice === "ROCK") {
+        if (computerChoice === "SCISSORS") return playerWins();
+        else if (computerChoice === "PAPER") return playerLooses();
+        else return equalityMsg;
+    }
+    else if (playerChoice === "PAPER") {
+        if (computerChoice === "ROCK") return playerWins();
+        else if (computerChoice === "SCISSORS") return playerLooses();
+        else return equalityMsg;
+    }
+    else if (playerChoice === "SCISSORS") {
+        if (computerChoice === "PAPER") return playerWins();
+        else if (computerChoice === "ROCK") return playerLooses();
+        else return equalityMsg;
+    }
 }
 
-function getRoundWinner(playerAnswer, computerAnswer) {
-    if (playerAnswer == "ROCK") {
-        if (computerAnswer == "PAPER") return "Computer";
-        else if (computerAnswer == "SCISSORS") return "Player";
-        else return "Nobody";
-    }
-    if (playerAnswer == "PAPER") {
-        if (computerAnswer == "SCISSORS") return "Computer";
-        else if (computerAnswer == "ROCK") return "Player";
-        else return "Nobody";
-    }
-    if (playerAnswer == "SCISSORS") {
-        if (computerAnswer == "ROCK") return "Computer";
-        else if (computerAnswer == "PAPER") return "Player";
-        else return "Nobody";
-    }
+
+// MAIN EXECUTION
+
+console.log("Hello Player, I am ready to play Rock-Paper-Scissors with you !");
+const nbRounds = getNbRounds();         // prompts the player to set the number of rounds for the game
+
+for (let i= 1; i<= nbRounds; i++) {     // loops over the number of rounds
+    let result = round();               // runs a round of the game and returns the result as a string
+    console.log(result);
+    console.log(`Your score: ${playerScore} - Computer score: ${computerScore}`);
 }
 
+console.log("--- THE GAME HAS ENDED ---")
+console.log(`Your final score: ${playerScore} - Computer's final score: ${computerScore}`);
+console.log(playerScore > computerScore ? "YOU HAVE WON THE GAME :D" : 
+            computerScore > playerScore ? "YOU HAVE LOST THE GAME :S" : 
+            "NOBODY HAS WON - FAIR GAME :-)");
 
-// EXECUTION
-welcome();
-remainingRounds = getRounds();
-let playerAnswer = getPlayerAnswer();
-let computerAnswer = getComputerAnswer();
-let roundWinner = undefined;
-roundWinner = getRoundWinner(playerAnswer, computerAnswer);
-console.log(roundWinner + " wins!")
+
+
+
+
+
+
+
+
+

@@ -32,4 +32,4 @@ F) Look for end of game or for more rounds [function isEndOfGame(rounds)]
     F-3) Announce the winner of the game [function EndOfGame()]
 
 
-
+>>> The above plan has been compromised during coding XD
