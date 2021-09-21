@@ -43,14 +43,30 @@ function getPlayerAnswer() {
 }
 
 function getComputerAnswer() {
-    const randomInt = Math.floor(Math.random() * 2);
+    const randomInt = Math.floor(Math.random() * 3);
     let computerAnswer = choices[randomInt];
     computerAnswer = computerAnswer.toUpperCase();
     console.log("... and the computer has chosen " + computerAnswer);
     return computerAnswer;
 }
 
-
+function getRoundWinner(playerAnswer, computerAnswer) {
+    if (playerAnswer == "ROCK") {
+        if (computerAnswer == "PAPER") return "Computer";
+        else if (computerAnswer == "SCISSORS") return "Player";
+        else return "Nobody";
+    }
+    if (playerAnswer == "PAPER") {
+        if (computerAnswer == "SCISSORS") return "Computer";
+        else if (computerAnswer == "ROCK") return "Player";
+        else return "Nobody";
+    }
+    if (playerAnswer == "SCISSORS") {
+        if (computerAnswer == "ROCK") return "Computer";
+        else if (computerAnswer == "PAPER") return "Player";
+        else return "Nobody";
+    }
+}
 
 
 // EXECUTION
@@ -58,3 +74,6 @@ welcome();
 remainingRounds = getRounds();
 let playerAnswer = getPlayerAnswer();
 let computerAnswer = getComputerAnswer();
+let roundWinner = undefined;
+roundWinner = getRoundWinner(playerAnswer, computerAnswer);
+console.log(roundWinner + " wins!")
