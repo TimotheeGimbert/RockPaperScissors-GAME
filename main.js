@@ -1,26 +1,34 @@
-// INIT
+////////////////////
+// INITIALIZATION //
+////////////////////
 
-const maxRounds = 10; // set the max limit of rounds
-const choices = ["ROCK", "PAPER", "SCISSORS"]; // array of valid choices
+const maxRounds = 10;
+const choices = ["ROCK", "PAPER", "SCISSORS"];
 let playerScore = 0;
 let computerScore = 0;
 
 
 
-// FUNCTIONS
+///////////////
+// FUNCTIONS //
+///////////////
 
-function getNbRounds() {        // prompts the player to set number of rounds
-    let nbRounds = parseInt(prompt("How many rounds do we play?")); // input number of rounds
-    while (!Number.isInteger(nbRounds) || nbRounds < 1) { // check if input is valid
-        nbRounds = parseInt(prompt("I need you to choose a positiv integer ...!")); // prompt again if not
+// The following function getNbRounds() prompts the user to define the number of rounds to be played, and returns it
+// If the user inputs an excessive amount of rounds, the function overrides it with maxRounds
+// It also verify the consistency of the user's input and prompts again if needed
+function getNbRounds() { 
+    let nbRounds = parseInt(prompt("How many rounds do we play?"));
+    while (!Number.isInteger(nbRounds) || nbRounds < 1) {
+        nbRounds = parseInt(prompt("I need you to choose a positiv integer ...!"));
     }
-    if (nbRounds > maxRounds) { // limiting the number of rounds
+    if (nbRounds > maxRounds) {
         console.log(`I don't have time for ${nbRounds} rounds...`);
         nbRounds = maxRounds;
     }
     console.log(`\n We will play ${nbRounds} rounds !`);
     return nbRounds;
 }
+
 function getPlayerChoice() {    // prompts the player and return his choice
     let choice = prompt("Enter your choice (rock, paper, or scissors)"); // asking for the input
     choice = choice.toUpperCase(); // capitalizing the input
@@ -32,6 +40,7 @@ function getPlayerChoice() {    // prompts the player and return his choice
     console.log("\n You have chosen " + choice); 
     return choice;
 }
+
 function getComputerChoice() {  // generates and returns a random choice
     const randomInt = Math.floor(Math.random() * 3);
     let choice = choices[randomInt];
@@ -39,6 +48,7 @@ function getComputerChoice() {  // generates and returns a random choice
     console.log("... and the computer has chosen " + choice);
     return choice;
 }
+
 function round() {              // runs a round of the game and returns the result as a string
     const playerChoice = getPlayerChoice();
     const computerChoice = getComputerChoice();
@@ -71,8 +81,9 @@ function round() {              // runs a round of the game and returns the resu
     }
 }
 
-
-// MAIN EXECUTION
+////////////////////
+// MAIN EXECUTION //
+////////////////////
 
 console.log("Hello Player, I am ready to play Rock-Paper-Scissors with you !");
 const nbRounds = getNbRounds();         // prompts the player to set the number of rounds for the game
