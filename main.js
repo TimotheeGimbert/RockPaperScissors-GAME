@@ -1,6 +1,6 @@
-////////////////////
-// INITIALIZATION //
-////////////////////
+///////////////
+// VARIABLES //
+///////////////
 
 const maxRounds = 10;
 const choices = ["ROCK", "PAPER", "SCISSORS"];
@@ -8,15 +8,14 @@ let playerScore = 0;
 let computerScore = 0;
 
 
-
 ///////////////
 // FUNCTIONS //
 ///////////////
 
-// The following function getNbRounds() prompts the user to define the number of rounds to be played, and returns it
-// If the user inputs an excessive amount of rounds, the function overrides it with maxRounds
-// It also verify the consistency of the user's input and prompts again if needed
 function getNbRounds() { 
+    // This function prompts the user to define the number of rounds to be played, and returns it
+    // If the user inputs an excessive amount of rounds, the function overrides it with maxRounds
+    // It also verify the consistency of the user's input and prompts again if needed
     let nbRounds = parseInt(prompt("How many rounds do we play?"));
     while (!Number.isInteger(nbRounds) || nbRounds < 1) {
         nbRounds = parseInt(prompt("I need you to choose a positiv integer ...!"));
@@ -29,19 +28,23 @@ function getNbRounds() {
     return nbRounds;
 }
 
-function getPlayerChoice() {    // prompts the player and return his choice
-    let choice = prompt("Enter your choice (rock, paper, or scissors)"); // asking for the input
-    choice = choice.toUpperCase(); // capitalizing the input
-    while (choices.indexOf(choice) == -1) { // while choice is not within the array of valid choices
+function getPlayerChoice() {
+    // This function prompts the player for a choice
+    // It capitalizes the input and verifies it exists within the array of valid choices, then returns it or prompts the user again
+    let choice = prompt("Enter your choice (rock, paper, or scissors)");
+    choice = choice.toUpperCase();
+    while (choices.indexOf(choice) == -1) { 
         console.log("Sorry but you did not input a possible choice ...");
-        choice = prompt("You have to choose between rock paper and scissors..."); // asking for an input again
-        choice = choice.toUpperCase(); // capitalizing the new input
+        choice = prompt("You have to choose between rock paper and scissors...");
+        choice = choice.toUpperCase();
     }
     console.log("\n You have chosen " + choice); 
     return choice;
 }
 
-function getComputerChoice() {  // generates and returns a random choice
+function getComputerChoice() {
+    // This function generates a random number between 0 and 1 then makes it an integer between 0 and 2
+    // Then it selects the appropriate string choice within the array of valid choices and returns it as the computer's random choice
     const randomInt = Math.floor(Math.random() * 3);
     let choice = choices[randomInt];
     choice = choice.toUpperCase();
@@ -49,34 +52,38 @@ function getComputerChoice() {  // generates and returns a random choice
     return choice;
 }
 
-function round() {              // runs a round of the game and returns the result as a string
+function round() {
+    // This function runs a round and returns the winner as a string
     const playerChoice = getPlayerChoice();
     const computerChoice = getComputerChoice();
-    function playerWins() {
+
+    const equalityMsg = "Nobody wins ... !";
+    function generateWinMsg() {
+        // This sub-function generates the winning string and updates the winner's score, then returns the message
         let playerWinsMsg = `YOU WIN! (${playerChoice.toLowerCase()} beats ${computerChoice.toLowerCase()})`;
         playerScore += 1;
         return playerWinsMsg;
     }
-    function playerLooses() {
+    function generateLooseMsg() {
+        // This sub-function generates the loosing string and updates the winner's score, then returns the message
         let playerLoosesMsg = `YOU LOOSE! (${computerChoice.toLowerCase()} beats ${playerChoice.toLowerCase()})`;
         computerScore += 1;
         return playerLoosesMsg;
     }
-    const equalityMsg = "Nobody wins ... !";
 
     if (playerChoice === "ROCK") {
-        if (computerChoice === "SCISSORS") return playerWins();
-        else if (computerChoice === "PAPER") return playerLooses();
+        if (computerChoice === "SCISSORS") return generateWinMsg();
+        else if (computerChoice === "PAPER") return generateLooseMsg();
         else return equalityMsg;
     }
     else if (playerChoice === "PAPER") {
-        if (computerChoice === "ROCK") return playerWins();
-        else if (computerChoice === "SCISSORS") return playerLooses();
+        if (computerChoice === "ROCK") return generateWinMsg();
+        else if (computerChoice === "SCISSORS") return generateLooseMsg();
         else return equalityMsg;
     }
     else if (playerChoice === "SCISSORS") {
-        if (computerChoice === "PAPER") return playerWins();
-        else if (computerChoice === "ROCK") return playerLooses();
+        if (computerChoice === "PAPER") return generateWinMsg();
+        else if (computerChoice === "ROCK") return generateLooseMsg();
         else return equalityMsg;
     }
 }
@@ -86,10 +93,10 @@ function round() {              // runs a round of the game and returns the resu
 ////////////////////
 
 console.log("Hello Player, I am ready to play Rock-Paper-Scissors with you !");
-const nbRounds = getNbRounds();         // prompts the player to set the number of rounds for the game
+const nbRounds = getNbRounds();         // prompts user for the number of rounds for the game
 
 for (let i= 1; i<= nbRounds; i++) {     // loops over the number of rounds
-    let result = round();               // runs a round of the game and returns the result as a string
+    let result = round();               // runs a round and returns a string annoucing the winner of the round
     console.log(result);
     console.log(`Your score: ${playerScore} - Computer score: ${computerScore}`);
 }
