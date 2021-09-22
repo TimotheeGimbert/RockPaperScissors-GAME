@@ -96,7 +96,7 @@ console.log("Hello Player, I am ready to play Rock-Paper-Scissors with you !");
 const nbRounds = getNbRounds();         // prompts user for the number of rounds for the game
 
 for (let i= 1; i<= nbRounds; i++) {     // loops over the number of rounds
-    let result = round();               // runs a round and returns a string annoucing the winner of the round
+    let result = round();               // runs a round and returns a string announcing the winner of the round
     console.log(result);
     console.log(`Your score: ${playerScore} - Computer score: ${computerScore}`);
 }
